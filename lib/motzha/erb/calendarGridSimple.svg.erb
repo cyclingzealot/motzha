@@ -19,9 +19,32 @@
 
    <!-- Days of week - X increments 14 between 3 and 87-->
    <% require 'date' %>
-   <% Date::DAYNAMES.each_with_index do | dwn, i | %>   <% xCord = 2 + 14 * i %>
+   <% xMargin = 2 %>
+   <% xSkip   = 14 %>
+   <% Date::DAYNAMES.each_with_index do | dwn, i | %>   <% xCord = xMargin + xSkip * i %>
         <text x="<%= xCord %>%" y="9%" fill="black"><%= dwn %></text>
     <% end %>
+
+    <%# Initialize loop %>
+    <%
+        date = @month
+        weekNum = 0
+    %>
+
+    <% begin %>
+        <%
+        dayOfWeekNum = date.strftime('%w').to_i  # 0-based
+        xCords = xMargin + xSkip * dayOfWeekNum
+        yCords = 20      + 16    * weekNum
+        %>
+
+        <text x="<%= xCords %>%" y="<%= yCords %>%" fill="black"><%= date.day %></text>
+
+        <% date += 1 %>
+        <% weekNum += 1 if date.strftime('%w').to_i == 0 %>
+    <% end until (date-1).month != date.month %>
+
+
 
 
 </svg>
