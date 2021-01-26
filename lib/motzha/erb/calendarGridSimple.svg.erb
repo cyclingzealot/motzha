@@ -18,14 +18,10 @@
    <line x1="85%" x2="85%" y1="2%" y2="98%" style="stroke-width:3;stroke:rgb(0,0,0)" />
 
    <!-- Days of week - X increments 14 between 3 and 87-->
-   <text x="2%" y="9%" fill="black">Sunday</text>
-   <text x="16%" y="9%" fill="black">Monday</text>
-   <text x="30%" y="9%" fill="black">Tuesday</text>
-   <text x="44%" y="9%" fill="black">Wednesday</text>
-   <text x="44%" y="9%" fill="black">Wednesday</text>
-   <text x="58%" y="9%" fill="black">Thursday</text>
-   <text x="72%" y="9%" fill="black">Friday</text>
-   <text x="86%" y="9%" fill="black">Saturday</text>
+   <% require 'date' %>
+   <% Date::DAYNAMES.each_with_index do | dwn, i | %>   <% xCord = 2 + 14 * i %>
+        <text x="<%= xCord %>%" y="9%" fill="black"><%= dwn %></text>
+    <% end %>
 
 
 </svg>
